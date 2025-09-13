@@ -1,3 +1,5 @@
+package kmp;
+
 public class lc_28 {
 
     public static void main(String[] args) {
