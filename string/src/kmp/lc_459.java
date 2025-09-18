@@ -31,6 +31,8 @@ public class lc_459 {
     /**
      * 使用KMP
      * 若最大长度前后缀不包含的字符串，长度可以整除s,则该字符串就是重复的子字符串
+     * 充分条件，如果字符串可以由重复子串构成->最长前后缀不包含的子串是最小重复子串
+     * 必要条件，如果最长相等的前后缀不包含的子串的长度，可以整除字符串s的长度->最长前后缀不包含的子串就是最小子串
      */
     public boolean repeatedSubstringPatternKmp(String s) {
         int[] next = getNext(s);
