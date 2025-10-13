@@ -20,6 +20,7 @@ public class lc_904 {
                 }
                 l++;
             }
+            //本题要求size==2，所以在大于2时滑动左指针，滑动结束后记录结果
             length=Math.max(length,(r-l+1));
         }
         return length;

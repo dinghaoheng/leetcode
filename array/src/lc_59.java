@@ -24,4 +24,32 @@ public class lc_59 {
         }
         return matrix;
     }
+
+    public static void main(String[] args) {
+        new lc_59().generateMatrix3(3);
+    }
+    public int[][] generateMatrix3(int n) {
+        int[][] matrix = new int[n][n];
+        int num = 1;
+        int row = 0;
+        int col = 0;
+        for (int i = 0; i < n / 2; i++) {
+            for (col = i; col < n - i - 1; col++) {
+                matrix[i][col] = num++;
+            }
+            for (row = i; row < n - i - 1; row++) {
+                matrix[row][col] = num++;
+            }
+            for (; col > i; col--) {
+                matrix[row][col] = num++;
+            }
+            for (; row > i; row--) {
+                matrix[row][col] = num++;
+            }
+        }
+        if (n % 2 != 0) {
+            matrix[n/2][n/2]=num;
+        }
+        return matrix;
+    }
 }
