@@ -12,4 +12,23 @@ public class lc_203 {
         return temp.next;
     }
 
+
+    public static void main(String[] args) {
+        ListNode node = ListNode.getNode(new int[]{7,7,7,7});
+        new lc_203().removeElements2(node,7);
+    }
+
+    public ListNode removeElements2(ListNode head, int val) {
+        ListNode dummy=new ListNode();
+        dummy.next=head;
+        ListNode temp=dummy;
+        while (temp!=null&&temp.next!=null){
+            if (temp.next.val==val){
+                temp.next=temp.next.next;
+            }
+            temp=temp.next;
+        }
+        return dummy.next;
+    }
+
 }
