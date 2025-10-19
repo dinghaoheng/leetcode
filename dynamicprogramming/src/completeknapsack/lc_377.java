@@ -1,3 +1,5 @@
+package completeknapsack;
+
 public class lc_377 {
     public static void main(String[] args) {
         int i = new lc_377().combinationSum4(new int[]{1, 2, 3}, 4);

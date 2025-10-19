@@ -1,3 +1,5 @@
+package completeknapsack;
+
 import java.util.Arrays;
 
 public class lc_279 {

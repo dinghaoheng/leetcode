@@ -1,5 +1,17 @@
 public class lc_707 {
-    class MyLinkedList {
+    public static void main(String[] args) {
+        MyLinkedList myLinkedList = new MyLinkedList();
+        myLinkedList.addAtHead(1);
+        myLinkedList.addAtTail(3);
+        myLinkedList.addAtIndex(1, 2);
+        myLinkedList.get(1);
+        myLinkedList.deleteAtIndex(1);
+        myLinkedList.get(1);
+        System.out.println(1);
+        System.out.println(1);
+    }
+
+    static class MyLinkedList {
         class ListNode {
             int val;
             ListNode next;
@@ -7,17 +19,18 @@ public class lc_707 {
             public ListNode(int val) {
                 this.val = val;
             }
+
             public ListNode() {
 
             }
         }
 
-        ListNode head;
-        int size;
+        private int size = 0;
+        private ListNode head = new ListNode();
 
         public MyLinkedList() {
-            this.head = new ListNode();
-            size = 0;
+            ListNode node = new ListNode();
+            head.next = node;
         }
 
         public int get(int index) {
@@ -25,10 +38,10 @@ public class lc_707 {
                 return -1;
             }
             ListNode dummy = head;
-            for (int i = 0; i <= index; i++) {
+            for (int i = 0; i < index; i++) {
                 dummy = dummy.next;
             }
-            return dummy.val;
+            return dummy.next.val;
         }
 
         public void addAtHead(int val) {
@@ -40,23 +53,17 @@ public class lc_707 {
         }
 
         public void addAtIndex(int index, int val) {
-            if (index > size) {
+            if (index < 0 || index > size) {
                 return;
             }
-            size++;
             ListNode node = new ListNode(val);
-            //注意小于零的判断
-            if (index < 0) {
-                node.next = head.next;
-                head.next = node;
-                return;
-            }
-            ListNode temp = head;
+            size++;
+            ListNode dummy = head;
             for (int i = 0; i < index; i++) {
-                temp = temp.next;
+                dummy = dummy.next;
             }
-            node.next = temp.next;
-            temp.next = node;
+            node.next = dummy.next;
+            dummy.next = node;
         }
 
         public void deleteAtIndex(int index) {
@@ -64,11 +71,11 @@ public class lc_707 {
                 return;
             }
             size--;
-            ListNode temp = head;
+            ListNode dummy = head;
             for (int i = 0; i < index; i++) {
-                temp = temp.next;
+                dummy = dummy.next;
             }
-            temp.next = temp.next.next;
+            dummy.next = dummy.next.next;
         }
     }
 }

@@ -1,3 +1,5 @@
+package completeknapsack;
+
 public class lc_518 {
     public static void main(String[] args) {
         int change = new lc_518().change(5, new int[]{1, 2, 3});

@@ -1,3 +1,5 @@
+package onezeroknapsack;
+
 public class lc_416 {
     public boolean canPartition(int[] nums) {
         int sum = 0;

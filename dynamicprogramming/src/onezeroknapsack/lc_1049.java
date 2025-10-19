@@ -1,3 +1,5 @@
+package onezeroknapsack;
+
 public class lc_1049 {
     public static void main(String[] args) {
         new lc_1049().lastStoneWeightII(new int[]{2,4,1,1});

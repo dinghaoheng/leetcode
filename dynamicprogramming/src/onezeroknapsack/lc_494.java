@@ -1,3 +1,5 @@
+package onezeroknapsack;
+
 import java.util.Arrays;
 
 public class lc_494 {
