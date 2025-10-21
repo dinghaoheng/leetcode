@@ -1,3 +1,5 @@
+package lcs;
+
 public class lc_718 {
     public static void main(String[] args) {
         int[] num1=new int[]{1,2,3,2,8};

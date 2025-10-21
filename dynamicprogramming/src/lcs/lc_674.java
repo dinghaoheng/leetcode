@@ -1,3 +1,5 @@
+package lcs;
+
 import java.util.Arrays;
 
 public class lc_674 {

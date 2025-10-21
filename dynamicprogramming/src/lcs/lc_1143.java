@@ -1,3 +1,5 @@
+package lcs;
+
 public class lc_1143 {
     public static void main(String[] args) {
         new lc_1143().longestCommonSubsequence("abcde","ace");
