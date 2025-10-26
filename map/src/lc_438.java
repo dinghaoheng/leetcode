@@ -30,6 +30,7 @@ public class lc_438 {
             arrS[convert(s.charAt(i - lenP))]--;
             arrS[convert(s.charAt(i))]++;
         }
+        //此处需要判断
         if (check()) {
             result.add(lenS - lenP);
         }
