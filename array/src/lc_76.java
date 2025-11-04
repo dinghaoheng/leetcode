@@ -47,7 +47,7 @@ public class lc_76 {
     }
 
     public static void main(String[] args) {
-        new lc_76().minWindow2("ADOBECODEBANC","ABC");
+        new lc_76().minWindow3("ADOBECODEBANC","ABC");
     }
 
     public String minWindow2(String s, String t) {
@@ -98,4 +98,50 @@ public class lc_76 {
         return s.substring(lResult, lResult + result);
     }
 
+
+    public String minWindow3(String s, String t) {
+        Map<Character,Integer> target=new HashMap();
+        for(char item : t.toCharArray()){
+            Integer count=target.getOrDefault(item,0);
+            target.put(item,count+1);
+        }
+        int num=target.size();
+        Map<Character,Integer> window=new HashMap();
+        int l=0;
+        int lResult=0;
+        int result=Integer.MAX_VALUE;
+        for(int r=0;r<s.length();r++){
+            char sChar=s.charAt(r);
+            if(!target.containsKey(sChar)){
+                continue;
+            }
+            Integer sCount=window.getOrDefault(sChar,0)+1;
+            window.put(sChar,sCount);
+            if(sCount==target.get(sChar)){
+                num--;
+            }
+            while(num==0){
+                char lChar=s.charAt(l);
+                if(target.containsKey(lChar)){
+                    Integer lCount=window.get(lChar)-1;
+                    Integer tCount=target.get(lChar);
+                    if(lCount==0){
+                        window.remove(lChar);
+                    }else{
+                        window.put(lChar,lCount);
+                    }
+                    if(lCount<tCount){
+                        num++;
+                    }
+                }
+                l++;
+            }
+            int len=r-l+1;
+            if(len<result){
+                result=len;
+                lResult=l;
+            }
+        }
+        return s.substring(lResult,lResult+result);
+    }
 }

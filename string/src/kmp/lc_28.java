@@ -3,6 +3,7 @@ package kmp;
 public class lc_28 {
 
     public static void main(String[] args) {
+        new lc_28().getNext("acbcaf");
     }
 
     public int strStr(String haystack, String needle) {
