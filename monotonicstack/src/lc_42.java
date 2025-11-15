@@ -34,19 +34,19 @@ public class lc_42 {
     }
 
     public int trap2(int[] height) {
-        int l=0;
-        int r=height.length-1;
-        int lMax=height[l];
-        int rMax=height[r];
-        int sum=0;
-        while (l<r){
-            lMax=Math.max(height[l],lMax);
-            rMax=Math.max(height[r],rMax);
-            if (lMax<=rMax){
-                sum+=lMax-height[l];
+        int l = 0;
+        int r = height.length - 1;
+        int lMax = height[l];
+        int rMax = height[r];
+        int sum = 0;
+        while (l < r) {
+            lMax = Math.max(height[l], lMax);
+            rMax = Math.max(height[r], rMax);
+            if (lMax <= rMax) {
+                sum += lMax - height[l];
                 l++;
-            }else {
-                sum+=rMax-height[r];
+            } else {
+                sum += rMax - height[r];
                 r--;
             }
         }

@@ -1,6 +1,4 @@
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * @Author: DHH
@@ -35,6 +33,30 @@ public class lc_20 {
                 }
             }else {
                 stack.addFirst(item);
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public boolean isValid2(String s) {
+        char[] arr=s.toCharArray();
+        Deque<Character> stack=new LinkedList<>();
+        Map<Character,Character> map=new HashMap(3,1);
+        map.put(')','(');
+        map.put('}','{');
+        map.put(']','[');
+        for(int i=0;i<arr.length;i++){
+            if(map.containsKey(arr[i])){
+                if(stack.isEmpty()){
+                    return false;
+                }
+                Character value=map.get(arr[i]);
+                Character stackValue=stack.removeFirst();
+                if(!stackValue.equals(value)){
+                    return false;
+                }
+            }else{
+                stack.addFirst(arr[i]);
             }
         }
         return stack.isEmpty();

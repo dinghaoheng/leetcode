@@ -1,3 +1,5 @@
+package binary;
+
 public class lc_704 {
 
     public int search(int[] nums, int target) {

@@ -4,6 +4,16 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class lc_236 {
+    public static void main(String[] args) {
+        TreeNode node6=new TreeNode(6);
+        TreeNode node4=new TreeNode(4);
+        TreeNode node3=new TreeNode(3);
+        TreeNode node1=new TreeNode(1);
+        node6.left=node4;
+        node4.left=node3;
+        node4.right=node1;
+        new lc_236().lowestCommonAncestor(node6,node3,node1);
+    }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) {
             return root;

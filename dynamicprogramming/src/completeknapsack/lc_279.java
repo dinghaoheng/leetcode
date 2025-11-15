@@ -3,6 +3,10 @@ package completeknapsack;
 import java.util.Arrays;
 
 public class lc_279 {
+    /**
+     * 时间复杂度为n*√n
+     * 空间复杂度为n
+     */
     public int numSquares(int n) {
         int[]dp=new int[n+1];
         Arrays.fill(dp,Integer.MAX_VALUE);

@@ -2,34 +2,35 @@ package onezeroknapsack;
 
 public class lc_416 {
     public boolean canPartition(int[] nums) {
-        int sum = 0;
-        for (int item : nums) {
-            sum += item;
+        //01背包问题，判断用n个数字，能不能填满容量为sum/2的背包
+        int sum=0;
+        for(int item : nums){
+            sum+=item;
         }
-        if (sum % 2 != 0) {
+        if(sum%2!=0){
             return false;
         }
-        sum /= 2;
-        int n = nums.length;
-        //dp[i][j]的含义为，容量上限为i背包，用前j个数字，可以得到的和最大为多少
-        //若和恰好为目标数字sum，则返回true
-        int[][] dp = new int[n][sum + 1];
-        for (int j = nums[0]; j <= sum; j++) {
-            dp[0][j] = nums[0];
+        int n=nums.length;
+        sum/=2;
+        //dp[i][j]：只用前i个数，背包容量为j，可以得到的最大价值是多少
+        int[][]dp=new int[n][sum+1];
+        for(int i=nums[0];i<=sum;i++){
+            dp[0][i]=nums[0];
         }
-        for (int i = 1; i < n; i++) {
-            for (int j = 0; j <= sum; j++) {
-                if (j < nums[i]) {
-                    dp[i][j] = dp[i - 1][j];
-                } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - nums[i]] + nums[i]);
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=sum;j++){
+                //如果当前容量放不下该物品
+                if(j<nums[i]){
+                    dp[i][j]=dp[i-1][j];
+                }else{
+                    dp[i][j]=Math.max(dp[i-1][j],dp[i-1][j-nums[i]]+nums[i]);
+                }
+                if(dp[i][sum]==sum){
+                    return true;
                 }
             }
-            if (dp[i][sum] == sum) {
-                return true;
-            }
         }
-        return dp[n - 1][sum] == sum;
+        return dp[n-1][sum]==sum;
     }
 
     public static void main(String[] args) {
@@ -37,32 +38,31 @@ public class lc_416 {
     }
 
     public boolean canPartition2(int[] nums) {
-        int sum = 0;
-        for (int item : nums) {
-            sum += item;
+        //01背包问题，判断用n个数字，能不能填满容量为sum/2的背包
+        int sum=0;
+        for(int item : nums){
+            sum+=item;
         }
-        if (sum % 2 != 0) {
+        if(sum%2!=0){
             return false;
         }
-        sum /= 2;
-        int n = nums.length;
-        //dp[i][j]的含义为，容量上限为i背包，用前j个数字，可以得到的和最大为多少
-        //若和恰好为目标数字sum，则返回true
-        int[] dp = new int[sum + 1];
-        for (int i = nums[0]; i <= sum; i++) {
-            dp[i] = nums[0];
+        int n=nums.length;
+        sum/=2;
+        //dp[i][j]：只用前i个数，背包容量为j，可以得到的最大价值是多少
+        int[]dp=new int[sum+1];
+        for(int i=nums[0];i<=sum;i++){
+            dp[i]=nums[0];
         }
-        for (int i = 1; i < n; i++) {
-            for (int j = sum; j >= 0; j--) {
-                if (j >= nums[i]) {
-                    dp[j] = Math.max(dp[j], dp[j - nums[i]] + nums[i]);
+        for(int i=1;i<n;i++){
+            //如果是压缩写法，需要从后往前遍历背包
+            for(int j=sum;j>=nums[i];j--){
+                dp[j]=Math.max(dp[j],dp[j-nums[i]]+nums[i]);
+                if(dp[sum]==sum){
+                    return true;
                 }
             }
-            if (dp[sum] == sum) {
-                return true;
-            }
         }
-        return dp[sum] == sum;
+        return dp[sum]==sum;
     }
 
     public boolean canPartition3(int[] nums) {
