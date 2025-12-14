@@ -3,7 +3,7 @@ package kmp;
 public class lc_28 {
 
     public static void main(String[] args) {
-        new lc_28().getNext("acbcaf");
+        new lc_28().getNext("aabaaa");
     }
 
     public int strStr(String haystack, String needle) {
@@ -39,6 +39,8 @@ public class lc_28 {
         for (;i<str.length();i++){
             //while循环，直到i和j可以匹配
             while (j>0&&str.charAt(i)!=str.charAt(j)){
+                //倒回前一位的最长相等前后缀
+                //这里可以直接回退的原因在于：最长相等的前后缀，j的后缀恰好是i的前缀，可以跳过已经比较过的部分
                 j=result[j-1];
             }
             if (str.charAt(i)==str.charAt(j)){

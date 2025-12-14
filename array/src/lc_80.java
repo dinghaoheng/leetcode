@@ -1,10 +1,11 @@
-public class lc_26 {
+public class lc_80 {
+    public static void main(String[] args) {
+        new lc_80().removeDuplicates(new int[]{1,1,1,2,2,3});
+    }
     public int removeDuplicates(int[] nums) {
         int l=0;
         for(int r=0;r<nums.length;r++){
-            //r小于1用于防止越界
-            //这里当前数字要和l的前k个数做比较
-            if(r<1||nums[r]!=nums[l-1]){
+            if(r<2||nums[r]!=nums[l-2]){
                 nums[l++]=nums[r];
             }
         }

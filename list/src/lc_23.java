@@ -39,37 +39,42 @@ public class lc_23 {
         }
     }
 
+    /**
+     * 分治，自底向上合并
+     * 空间复杂度为o1
+     * 时间复杂度为LlogM,m为数组的长度，L为链表的节点个数
+     */
     public ListNode mergeKLists2(ListNode[] lists) {
-        if(lists.length==0){
+        int n=lists.length;
+        if(n==0){
             return null;
         }
-        if (lists.length==1){
-            return lists[0];
+        for(int step=1;step<n;step*=2){
+            for(int i=0;i<n-step;i+=step*2){
+                lists[i]=mergeTwoList(lists[i],lists[i+step]);
+            }
         }
-        ListNode result=lists[0];
-        for(int i=1;i<lists.length;i++){
-            result=merge(result,lists[i]);
-        }
-        return result;
+        return lists[0];
     }
-    private ListNode merge(ListNode nodeA,ListNode nodeB){
-        ListNode pre=new ListNode();
-        ListNode temp=pre;
-        while(nodeA!=null&&nodeB!=null){
-            if (nodeA.val<=nodeB.val){
-                temp.next=nodeA;
-                nodeA=nodeA.next;
-            }else {
-                temp.next=nodeB;
-                nodeB=nodeB.next;
+    private ListNode mergeTwoList(ListNode headA,ListNode headB){
+        ListNode dummy=new ListNode();
+        ListNode temp=dummy;
+        while(headA!=null&&headB!=null){
+            if(headA.val<headB.val){
+                temp.next=headA;
+                headA=headA.next;
+            }else{
+                temp.next=headB;
+                headB=headB.next;
             }
             temp=temp.next;
         }
-        if (nodeA!=null){
-            temp.next=nodeA;
-        }else {
-            temp.next=nodeB;
+        if(headA!=null){
+            temp.next=headA;
         }
-        return pre.next;
+        if(headB!=null){
+            temp.next=headB;
+        }
+        return dummy.next;
     }
 }

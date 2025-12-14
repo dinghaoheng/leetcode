@@ -1,6 +1,7 @@
 public class lc_48 {
     public void rotate(int[][] matrix) {
         int n = matrix.length;
+        //[i,j]->[j,n-i-1];
         for (int i = 0; i < n / 2; i++) {
             //列向上取整
             for (int j = 0; j < (n + 1) / 2; j++) {

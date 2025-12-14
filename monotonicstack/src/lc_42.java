@@ -34,20 +34,22 @@ public class lc_42 {
     }
 
     public int trap2(int[] height) {
-        int l = 0;
-        int r = height.length - 1;
-        int lMax = height[l];
-        int rMax = height[r];
-        int sum = 0;
-        while (l < r) {
-            lMax = Math.max(height[l], lMax);
-            rMax = Math.max(height[r], rMax);
-            if (lMax <= rMax) {
-                sum += lMax - height[l];
-                l++;
-            } else {
-                sum += rMax - height[r];
-                r--;
+        int l=0;
+        int r=height.length-1;
+        //从左往右数的最大值
+        int lMax=0;
+        //从右往左数的最大值
+        int rMax=0;
+        int sum=0;
+        while(l<r){
+            lMax=Math.max(lMax,height[l]);
+            rMax=Math.max(rMax,height[r]);
+            //每个位置能接的雨水取决于这个位置左边的最大值和右边的最大值
+            //取二中中较小的哪一个
+            if(lMax<rMax){
+                sum+=lMax-height[l++];
+            }else{
+                sum+=rMax-height[r--];
             }
         }
         return sum;

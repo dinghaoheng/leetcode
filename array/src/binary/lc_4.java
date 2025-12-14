@@ -5,7 +5,7 @@ public class lc_4 {
         int[] nums1 = new int[]{1, 3};
         int[] nums2 = new int[]{2};
 
-        new lc_4().findMedianSortedArrays(nums1, nums2);
+        new lc_4().findMedianSortedArrays3(nums1, nums2);
     }
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -89,33 +89,41 @@ public class lc_4 {
      * 在结尾再判断越界的情况，解决了前一种解法中需要覆盖数组的m和n的时间复杂度
      */
     public double findMedianSortedArrays3(int[] nums1, int[] nums2) {
-        if (nums1.length > nums2.length) {
-            return findMedianSortedArrays3(nums2, nums1);
-        }
         int m = nums1.length;
         int n = nums2.length;
+        if (m > n) {
+            return findMedianSortedArrays3(nums2, nums1);
+        }
+        //第一组有i个数在nums中，有j个数在nums2中
         int l = 0;
         int r = m - 1;
-        //第一组有i+1个数在nums1，第一组有j+1个数在nums2，
-        //因为默认头尾各有一个正无穷和负无穷
         while (l <= r) {
+            //由于我们先计算i，求差得出j，因此需要保证m<=n，否则会数据越界
             int i = l + ((r - l) >> 1);
+            //j+1=(m+n+1)/2-(i+1);
             int j = (m + n + 1) / 2 - i - 2;
+            //第一个组的最大值小于第二组的最小值
+            //Math.max(ai,aj)<=Math.min(ai+1,bj+1);
             if (nums1[i] <= nums2[j + 1]) {
                 l = i + 1;
             } else {
                 r = i - 1;
             }
         }
-        //遍历结束之后，l的位置在i+1，我们需要找的是i，而不是i+1
+        //结束之后i处于ai+1的位置
         int i = r;
         int j = (m + n + 1) / 2 - i - 2;
-        int ai = i >= 0 ? nums1[i] : Integer.MIN_VALUE;
-        int bj = j >= 0 ? nums2[j] : Integer.MIN_VALUE;
-        int ai1 = i + 1 < m ? nums1[i + 1] : Integer.MAX_VALUE;
-        int bj1 = j + 1 < n ? nums2[j + 1] : Integer.MAX_VALUE;
+        int ai = i == -1 ? Integer.MIN_VALUE : nums1[i];
+        int bj = j == -1 ? Integer.MIN_VALUE : nums2[j];
+        int ai1 = i + 1 == m ? Integer.MAX_VALUE : nums1[i + 1];
+        int bi1 = j + 1 == n ? Integer.MAX_VALUE : nums2[j + 1];
         int max1 = Math.max(ai, bj);
-        int min2 = Math.min(ai1, bj1);
-        return (m + n) % 2 > 0 ? max1 : (max1 + min2) / 2.0;
+        int max2 = Math.min(ai1, bi1);
+        if ((m + n) % 2 != 0) {
+            return max1;
+        } else {
+            return (max1 + max2) / 2.0;
+        }
     }
+
 }

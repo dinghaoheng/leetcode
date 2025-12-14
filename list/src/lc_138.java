@@ -1,28 +1,38 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class lc_138 {
     public Node copyRandomList(Node head) {
-        Map<Node, Node> map = new HashMap<>();
-        Node pre = new Node(0);
-        Node temp = pre;
-        Node temp2 = head;
-        while (temp2 != null) {
-            Node node = new Node(temp2.val);
-            map.put(temp2, node);
-            temp.next = node;
-            temp = temp.next;
-            temp2 = temp2.next;
+        if(head==null){
+            return null;
         }
-        Node temp3 = head;
-        Node temp4 = pre;
-        while (temp3 != null) {
-            if (temp3.random != null) {
-                temp4.next.random = map.get(temp3.random);
+        //构建新的节点
+        Node temp1=head;
+        while(temp1!=null){
+            Node newNode=new Node(temp1.val);
+            newNode.next=temp1.next;
+            temp1.next=newNode;
+            temp1=temp1.next.next;
+        }
+        //构建random指针
+        Node temp2=head;
+        while(temp2!=null){
+            if(temp2.random!=null){
+                temp2.next.random=temp2.random.next;
             }
-            temp3 = temp3.next;
-            temp4 = temp4.next;
+            temp2=temp2.next.next;
         }
-        return pre.next;
+        //分离两个链表，并且复原旧链表
+        Node oldHead=head;
+        Node newHead=head.next;
+        while(oldHead!=null&&oldHead.next.next!=null){
+            Node nextOld=oldHead.next.next;
+            Node nextNew=nextOld.next;
+            //链接新链表
+            oldHead.next.next=nextNew;
+            //复原旧链表
+            oldHead.next=nextOld;
+            oldHead=nextOld;
+        }
+        //最后一步，需要恢复原链表的下一个节点为空
+        oldHead.next=null;
+        return newHead;
     }
 }
